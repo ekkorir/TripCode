@@ -1,0 +1,543 @@
+#include<iostream>
+#include<iomanip>
+#include<string>
+using namespace std;
+
+//Function Prototypes
+int getDaysNum(int num);
+int getDepart_Time(int &depart);
+int getArrival_Time(int &arrival);
+double getTripFare(double airFare);
+double getCarRental(double amount);
+double getMilesCost(double cost);
+double getParkingFee(int days,double &cPark,double &pPark);
+void getTaxi(int days, double &cTaxi, double &pTaxi);
+double getRegiFee(double RegistrationFee);
+void getHotelExpe(int days, double &cHot, double &pHot);
+
+
+void costBreakfast(double &C, double &P, double mealcost);
+void costLunch(double &C, double &P, double mealcost);
+void costDinner(double &C, double &P, double mealcost);
+void getMeals( int depart, int arivial, int days, double &personal, double &corp);
+
+
+int main ()
+{
+	double miles;
+	int days, dTime, aTime, arrival;
+	double rtFare=0.0, carRent=0.0, cParking=0.0, pParking=0.0, cTaxi=0.0, pTaxi=0.0, regFee=0.0, cHotel=0.0, pHotel=0.0, pMeal=0.0, cMeal=0.0;
+	cout<<"This program will calculate the total personal expenses\nand business expenses of a business trip."<<endl;
+	
+	//This next portion calculates the total cost of how much the person pays and
+	//how much the business pays for the meals.
+	return 0;
+	
+    int day;
+	cin>>day;
+	getHotelExpe(day,cHotel,pHotel);
+	cout<<"cHotel="<<cHotel<<"\tpHotel="<<pHotel;
+	return 0;
+	
+	getMeals(dTime,aTime,day,pMeal,cMeal);
+	cout<<"P="<<pMeal<<"\tC="<<cMeal;
+	return 0;
+	
+	getMeals(dTime,aTime,day,pMeal,cMeal);
+	cout<<"P="<<pMeal<<"\tC="<<cMeal;
+	return 0;
+    
+   	getParkingFee(days,cParking,pParking);
+	cout<<"C="<<cParking<<"\tP="<<pParking;
+	return 0;
+    
+   	cout<<"days:";
+	cin>>days;
+    getTaxi( days,  cTaxi,   pTaxi);
+	cout<<"C="<<cTaxi<<"\tP="<<pTaxi;
+	return 0;	
+    
+    int num = 0, departTime, arrivalTime;
+	string name;
+	cout <<setw(20);
+	cout <<right << setw(30)<< "TRAVEL EXPENSE FOR BUSINESSPERSON " <<"\n";
+	cout << right<< setw(30) <<"EMPLOYEE NAME:  ";
+	getline(cin,name);
+	num = getDaysNum(num);
+	getDepart_Time(departTime);
+	getArrival_Time(arrivalTime);
+	system("pause");
+	return 0;	
+
+}
+//double getTripFare(double airFare);
+//Function to get number of days spent 
+int getDaysNum(int num)
+{
+  cout <<"Please enter the number of days spent on the trip: "<<"\n";
+  cin  >> num;
+  //Check for a valid number of days 
+  while(num << 0){
+  cout <<"ERROR MESSAGE.You have entered invalid input.Re-enter.\n";
+  cout <<"Please enter the number of days spent on the trip: "<<"\n";
+  cin  >> num;
+  }
+ 
+ return num;
+}//end getDaysNum()
+
+//Function to call days of depart and arriavl
+int getDepart_Time()
+{
+	int depart;
+  cout <<"*****DEPARTURE TIME FORMAT ***(00:00)*****\n";
+  cout <<"===============================================\n";
+  cout <<"*************DEPARTURE*************\n";
+  cout <<"Please enter the departure time for the trip: "<< setw(5) <<"\n\n";
+  cin >> depart;
+  //Validate time in the range of 0 - 23:59
+  if((depart < 0) || (depart > 2359))
+  {
+   cout <<"ERROR MESSAGE: You have entered and invalid time.Re-enter.\n";
+   cin >> depart;
+  }
+ return depart;
+}//end getDepart_Time()
+
+//Function to call arrival time
+int getArrival_Time(int arrival)
+{
+
+  cout <<"*****ARRIVAL TIME FORMAT ***(00:00)*****\n";
+  cout <<"*************ARRIVAL*************\n";
+  cout <<"Please enter the departure time for the trip: "<< setw(5) <<"\n\n";
+  cin >> arrival;
+  
+  
+    //Validate time in the range of 0 - 23:59
+  if((arrival < 0) || (arrival > 2359));
+  {
+   cout <<"ERROR MESSAGE: You have entered and invalid time.Re-enter.\n";
+   cin >> arrival;
+  }
+  return arrival;
+}//end getArrival_Time()
+
+//Function to call for airfare 
+double getTripFare(double airFare)
+{
+       
+       cout <<"Please enter the amount for the flight:  "<<setw(5) <<"\n";
+       cin >>airFare;
+       
+       //validate the fare value
+       while(airFare < 0){
+                     cout <<"ERROR MESSAGE: You have entered incorrect amount. Re-enter\n";
+                     cin >> airFare;
+                     }
+                     return airFare;
+}//end getTripairFare()
+
+//Function to call rental car value
+double getCarRental(double amount){
+ cout <<"Please enter the amount spent on car rental:  "<<setw(5) <<"\n";
+ cin >>amount;
+ //validate the fare value
+ while(amount < 0){
+ cout <<"ERROR MESSAGE: You have entered incorrect amount. Re-enter\n";
+ cin >> amount;
+ }
+ 
+ return amount;
+}//end getcarRental()
+
+double getMilesCost(double cost)
+{ 
+  double miles, rateExpense = 0.27;
+  cout <<"If private vehicle was used. Please enter the miles driven:  "<<setw(5) <<"\n";
+  cin >>miles;
+ //check for valid mile travelled
+  while(miles < 0){
+  cout <<"ERROR MESSAGE: Please enter a valid miles number:  " <<setw(5) <<"\n";
+  cin >>miles;
+ }
+
+ cost = miles * rateExpense;
+
+return cost;
+}//end getMilesCost()
+
+//Function to call amount spent on parking
+void getPark(int days,double &cPark,double &pPark)
+{
+	int temp=1;
+	double cost=0;
+	do
+	{
+		cout<<"Please input the cost of parking spent on the day of your departure: ";
+		cin>>cost;
+		if(cost<0)
+		{cout<<"Please enter a positive number or zero."<<endl;}
+	}while(cost<0);
+	if(cost<=6)
+	{cPark=cPark+cost;}
+	else
+	{
+		cPark=cPark+6;
+		cost=cost-6;
+		pPark=pPark+cost;
+	}
+	while (days>0)
+	{
+		do
+		{
+			cout<<"Please input the cost of parking spent on day "<<temp<<": ";
+			cin>>cost;
+			if(cost<0)
+			{cout<<"Please enter a positive number or zero."<<endl;}
+		}while(cost<0);
+		
+		if(cost<=6)
+		{cPark=cPark+cost;}
+		else
+		{
+			cPark=cPark+6;
+			cost=cost-6;
+			pPark=pPark+cost;
+		}
+		days--;
+		temp++;
+	}
+	do
+	{
+		cout<<"Please input the cost of parking spent on day of arivial: ";
+		cin>>cost;
+		if(cost<0)
+		{cout<<"Please enter a positive number or zero."<<endl;}
+	}while(cost<0);
+	
+	if(cost<=6)
+	{cPark=cPark+cost;}
+	else
+	{
+		cPark=cPark+6;
+		cost=cost-6;
+		pPark=pPark+cost;
+	}
+}//end getParkingFee()*/
+
+void getTaxi(int days, double &cTaxi, double &pTaxi)
+{
+	int temp=1;
+	double cost=0;
+	do
+	{
+		cout<<"Please input any taxi costs for the day of departure: ";
+		cin>>cost;
+		if(cost<0)
+		{cout<<"Please enter a positive number or zero."<<endl;}
+	}while(cost<0);
+	if(cost<=10)
+	{cTaxi=cTaxi+cost;}
+	else
+	{
+		cTaxi=cTaxi+10;
+		cost=cost-10;
+		pTaxi=pTaxi+cost;
+	}
+	while (days>0)
+	{
+		do
+		{
+			cout<<"Please input any taxi costs for day "<<temp<<": ";
+			cin>>cost;
+			if(cost<0)
+			{cout<<"Please enter a positive number or zero."<<endl;}
+		}while(cost<0);
+		
+		if(cost<=10)
+		{cTaxi=cTaxi+cost;}
+		else
+		{
+			cTaxi=cTaxi+10;
+			cost=cost-10;
+			pTaxi=pTaxi+cost;
+		}
+		days--;
+		temp++;
+	}
+	do
+	{
+		cout<<"Please input any taxi costs for the day of arivial: ";
+		cin>>cost;
+		if(cost<0)
+		{cout<<"Please enter a positive number or zero."<<endl;}
+	}while(cost<0);
+	if(cost<=10)
+	{cTaxi=cTaxi+cost;}
+	else
+	{
+		cTaxi=cTaxi+10;
+		cost=cost-10;
+		pTaxi=pTaxi+cost;
+	}
+}
+
+//Function to call for registration fee
+double getRegiFee(double RegistrationFee)
+{
+ cout <<"Please enter the cost for conference or seminar registration:  "<<setw(5)<<"\n";
+ cin >>RegistrationFee;
+ //check for the valid amount 
+ while(RegistrationFee < 0)
+ {
+ cout <<"ERROR MESSAGE!. Wrong amount re-enter.\n";
+ cout <<"Please enter the cost for conference or seminar registration:  "<<setw(5)<<"\n";
+ cin >>RegistrationFee;
+}
+
+return RegistrationFee;
+}//end getRegiFee();
+
+//Function to call Hotel Expense
+void getHotelExpe(int days, double &cHot, double &pHot)
+{
+	cHot=0, pHot=0;
+	int temp=2;
+	double cost;
+	do
+	{
+		cout<<"Please enter the hotel expences for the night 1: ";
+		cin>>cost;
+		if (cost<0)
+ 		{cout<<"Please enter a positive number or zero."<<endl;}
+ 	}while(cost<0);
+	if (cost<=90)
+	{cHot=cHot+cost;}
+	else
+	{
+		cHot=cHot+90;
+		cost=cost-90;
+		pHot=pHot+cost;
+	}
+	while(days>0)
+	{
+		do
+		{
+			cout<<"Please enter the hotel exoences for night "<<temp<<": ";
+			cin>>cost;
+			if (cost<0)
+ 			{cout<<"Please enter a positive number or zero."<<endl;}
+ 		}while(cost<0);
+		if (cost<=90)
+		{cHot=cHot+cost;}
+		else
+		{
+			cHot=cHot+90;
+			cost=cost-90;
+			pHot=pHot+cost;
+		}
+	days--;
+	temp++;
+	}
+}
+void costBreakfast(double &C, double &P, double mealcost)
+{
+	if (mealcost<=9)
+ 	{C=C+mealcost;}
+ 	else if(mealcost>9)
+ 	{
+	 C=C+9;
+	 P=P+(mealcost-9);
+	}
+}
+void costLunch(double &C, double &P, double mealcost)
+{
+	if (mealcost<=12)
+ 	{C=C+mealcost;}
+ 	else if(mealcost>12)
+ 	{
+	 C=C+12;
+	 P=P+(mealcost-12);
+	}
+}
+void costDinner(double &C, double &P, double mealcost)
+{
+	if (mealcost<=16)
+ 	{C=C+mealcost;}
+ 	else if(mealcost>16)
+ 	{
+	 C=C+16;
+	 P=P+(mealcost-16);
+	}
+}
+void getMeals( int depart, int arivial, int days, double &personal, double &corp)
+{
+	int temp=1;
+ 	double cost;
+ 	//for departure day with three meals
+ 	if (depart<700)
+	{
+		do
+		{
+ 			cout<<"Please enter the cost of breakfist on departure day: ";
+ 			cin>>cost;
+ 			if (cost<0)
+ 			{cout<<"Please enter a positive number or zero."<<endl;}
+ 		}while(cost<0);
+ 		costBreakfast(corp,personal,cost);
+ 		
+ 		do
+ 		{
+			cout<<"\nPlease enter the cost of lunch on departure day: ";
+ 			cin>>cost;
+ 			if (cost<0)
+ 			{cout<<"Please enter a positive number or zero."<<endl;}
+ 		}while(cost<0);
+ 		costLunch(corp,personal,cost);
+			
+		do
+		{
+ 			cout<<"\nPlease enter the cost of Dinner: ";
+ 			cin>>cost;
+		 	if (cost<0)
+ 			{cout<<"Please enter a positive number or zero."<<endl;}
+ 		}while(cost<0);
+ 		costDinner(corp,personal,cost);
+ 	}
+	//for departure day with two meals
+	else if ((depart<1200)&&(depart>700))
+	{
+		cout<<"Your departure is too late for breakfast.\n";
+		do
+		{
+			cout<<"Please enter the cost of lunch on departure day: ";
+			cin>>cost;
+			if (cost<0)
+ 			{cout<<"Please enter a positive number or zero."<<endl;}
+ 		}while(cost<0);
+		costLunch(corp,personal,cost);
+		
+		do
+		{
+			cout<<"Please enter the cost of dinner on departure day: ";
+			cin>>cost;
+			if (cost<0)
+ 			{cout<<"Please enter a positive number or zero."<<endl;}
+ 		}while(cost<0);
+		costDinner(corp,personal,cost);
+	}
+	//fore depature day with one meal
+	else if((depart<1200)&&(depart>1800))
+	{
+		cout<<"Your departure is too late for breakfist or lunch.\n";
+		do
+		{
+			cout<<"Please enter the cost of dinner on departure day: ";
+			cin>>cost;
+			if (cost<0)
+ 			{cout<<"Please enter a positive number or zero."<<endl;}
+ 		}while(cost<0);
+		costDinner(corp,personal,cost);
+	}
+ 	else
+ 	{cout<<"Unfortunately, your departure time does not allow for any meals to be paid for by the company. Sorry.";}
+	 while(days>=1)
+ 	{
+ 		do
+ 		{
+ 			cout<<"Please enter the cost of breakfast for day "<<temp<<": ";
+ 			cin>>cost;
+ 			if (cost<0)
+ 			{cout<<"Please enter a positive number or zero."<<endl;}
+ 		}while(cost<0);
+ 		costBreakfast(corp,personal,cost);
+ 		
+		do
+		{
+			cout<<"Please enter the cost of lunch for day "<<temp<<": ";
+ 			cin>>cost;
+ 			if (cost<0)
+ 			{cout<<"Please enter a positive number or zero."<<endl;}
+ 		}while(cost<0);
+ 		costLunch(corp,personal,cost);
+ 		
+ 		do
+ 		{
+ 			cout<<"Please enter the cost of dinner for day "<<temp<<": ";
+ 			cin>>cost;
+ 			if (cost<0)
+ 			{cout<<"Please enter a positive number or zero."<<endl;}
+ 		}while(cost<0);
+ 		costDinner(corp,personal,cost);
+ 		temp++;
+ 		days--;
+	}
+	if (arivial>1900)
+	{
+		do
+		{
+			cout<<"Please enter the cost of breakfist on arivial day: ";
+ 			cin>>cost;
+ 			if (cost<0)
+ 			{cout<<"Please enter a positive number or zero."<<endl;}
+ 		}while(cost<0);
+ 		costBreakfast(corp,personal,cost);
+ 		
+ 		do
+		{
+			cout<<"\nPlease enter the cost of lunch on arivial day: ";
+ 			cin>>cost;
+ 			if (cost<0)
+ 			{cout<<"Please enter a positive number or zero."<<endl;}
+ 		}while(cost<0);
+ 		costLunch(corp,personal,cost);
+			
+		do
+		{
+ 			cout<<"\nPlease enter the cost of dinner on arivial day: ";
+ 			cin>>cost;
+ 			if (cost<0)
+ 			{cout<<"Please enter a positive number or zero."<<endl;}
+ 		}while(cost<0);
+ 		costDinner(corp,personal,cost);
+ 	}
+	//for arivial time without dinner
+	else if ((arivial<=1900)&&(arivial>1300))
+	{
+		cout<<"Your arivial is too early for dinner.\n";
+		do
+		{
+			cout<<"Please enter the cost of breakfast on departure day: ";
+			cin>>cost;
+			if (cost<0)
+ 			{cout<<"Please enter a positive number or zero."<<endl;}
+ 		}while(cost<0);
+		costBreakfast(corp,personal,cost);
+		
+		do
+		{
+			cout<<"Please enter the cost of lunch on departure day: ";
+			cin>>cost;
+			if (cost<0)
+ 			{cout<<"Please enter a positive number or zero."<<endl;}
+ 		}while(cost<0);
+		costLunch(corp,personal,cost);
+	}
+	//fore arivial time without dinner or lunch
+	else if((arivial<=1300)&&(arivial>800))
+	{
+		cout<<"Your arivial is too late for lunch or dinner.\n";
+		do
+		{
+			cout<<"Please enter the cost of breakfast on departure day: ";
+			cin>>cost;
+			if (cost<0)
+ 			{cout<<"Please enter a positive number or zero."<<endl;}
+ 		}while(cost<0);
+		costBreakfast(corp,personal,cost);
+	}
+ 	else
+	{cout<<"Unfortunately, your arivial time does not allow for any meals to be paid for by the company. Sorry.";}
+}
+
